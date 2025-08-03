@@ -9,7 +9,6 @@ export class TextAnalysisRepository implements ITextAnalysisRepository {
     private textAnalysisCollection = AppDataSource.getRepository(
       TextAnalysisEntity,
     ),
-    // eslint-disable-next-line no-empty-function
   ) {}
 
   async create(

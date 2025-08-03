@@ -48,6 +48,7 @@
     "camelcase": "off",
     "consistent-return": "off",
     "no-useless-constructor": "off",
+    "no-empty-function": "off",
     "class-methods-use-this": "off",
     "import/extensions": [
       "error",
