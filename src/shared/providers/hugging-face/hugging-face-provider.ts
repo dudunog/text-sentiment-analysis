@@ -11,11 +11,13 @@ import {
 } from "./hugging-face.types";
 
 export class HuggingFaceProvider implements IHuggingFaceProvider {
-  private accessToken: string;
+  private readonly accessToken: string;
 
-  private baseUrl: string;
+  private readonly baseUrl: string;
 
-  private model: string;
+  private readonly model: string;
+
+  private readonly confidenceThreshold = 0.3;
 
   constructor() {
     this.accessToken = process.env.HUGGING_FACE_ACCESS_TOKEN || "";
@@ -31,60 +33,10 @@ export class HuggingFaceProvider implements IHuggingFaceProvider {
     try {
       logger.mapperInfo(`Executing Hugging Face: ${text.substring(0, 50)}...`);
 
-      const response = await fetch(`${this.baseUrl}/${this.model}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${this.accessToken}`,
-        },
-        body: JSON.stringify({
-          inputs: text,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Hugging Face API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      const predictions = Array.isArray(data) ? data : [data];
-      const sentimentScores = predictions[0] as SentimentPrediction;
-
-      let negativeScore = 0;
-      let positiveScore = 0;
-
-      sentimentScores.forEach((item: SentimentScore) => {
-        if (item.label === "NEGATIVE") {
-          negativeScore = item.score;
-        } else if (item.label === "POSITIVE") {
-          positiveScore = item.score;
-        }
-      });
-
-      const scoreDifference = Math.abs(positiveScore - negativeScore);
-      const threshold = 0.3;
-
-      let predictedSentiment: PredictedSentiment;
-      let confidence: ConfidenceScore;
-
-      if (scoreDifference < threshold) {
-        predictedSentiment = "neutral";
-        confidence = 1 - scoreDifference;
-      } else if (positiveScore > negativeScore) {
-        predictedSentiment = "positive";
-        confidence = positiveScore;
-      } else {
-        predictedSentiment = "negative";
-        confidence = negativeScore;
-      }
-
-      let score = 0;
-      if (predictedSentiment === "positive") {
-        score = confidence;
-      } else if (predictedSentiment === "negative") {
-        score = -confidence;
-      }
+      const sentimentScores = await this.fetchSentimentScores(text);
+      const { predictedSentiment, confidence } =
+        this.calculateSentiment(sentimentScores);
+      const score = this.calculateScore(predictedSentiment, confidence);
 
       logger.mapperInfo(`Hugging Face result: ${predictedSentiment})`);
 
@@ -97,5 +49,78 @@ export class HuggingFaceProvider implements IHuggingFaceProvider {
       logger.mapperError(`Error in Hugging Face: ${error}`);
       throw error;
     }
+  }
+
+  private async fetchSentimentScores(
+    text: string,
+  ): Promise<SentimentPrediction> {
+    const response = await fetch(`${this.baseUrl}/${this.model}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+      body: JSON.stringify({
+        inputs: text,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Hugging Face API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const predictions = Array.isArray(data) ? data : [data];
+    return predictions[0] as SentimentPrediction;
+  }
+
+  private calculateSentiment(sentimentScores: SentimentPrediction): {
+    predictedSentiment: PredictedSentiment;
+    confidence: ConfidenceScore;
+  } {
+    let negativeScore = 0;
+    let positiveScore = 0;
+
+    sentimentScores.forEach((item: SentimentScore) => {
+      if (item.label === "NEGATIVE") {
+        negativeScore = item.score;
+      } else if (item.label === "POSITIVE") {
+        positiveScore = item.score;
+      }
+    });
+
+    const scoreDifference = Math.abs(positiveScore - negativeScore);
+
+    if (scoreDifference < this.confidenceThreshold) {
+      return {
+        predictedSentiment: "neutral",
+        confidence: 1 - scoreDifference,
+      };
+    }
+
+    if (positiveScore > negativeScore) {
+      return {
+        predictedSentiment: "positive",
+        confidence: positiveScore,
+      };
+    }
+
+    return {
+      predictedSentiment: "negative",
+      confidence: negativeScore,
+    };
+  }
+
+  private calculateScore(
+    predictedSentiment: PredictedSentiment,
+    confidence: ConfidenceScore,
+  ): number {
+    if (predictedSentiment === "positive") {
+      return confidence;
+    }
+    if (predictedSentiment === "negative") {
+      return -confidence;
+    }
+    return 0;
   }
 }
