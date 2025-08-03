@@ -9,7 +9,6 @@ import { ITextAnalysisRepository } from "./_ports/repositories/text-analysis-rep
 export class CreateTextAnalysisUseCase implements ICreateTextAnalysisUseCase {
   constructor(
     private readonly textAnalysisRepository: ITextAnalysisRepository,
-    // eslint-disable-next-line no-empty-function
   ) {}
 
   async execute({
