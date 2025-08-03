@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es2021",
+    "module": "CommonJS",
+    "lib": ["es6", "DOM"],
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "removeComments": true,
+    "baseUrl": "./",
+    "rootDir": "./",
+    "isolatedModules": false,
+    "paths": {
+      "@/types/*": ["./src/@types/*"],
+      "@contexts/*": ["./src/contexts/*"],
+      "@main/*": ["./src/main/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@validation/*": ["./src/shared/validations/*"]
+    },
+    "allowJs": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "typeRoots": ["./src/main/types", "./node_modules/@types"],
+  },
+  "include": ["src/**/*", "jest.config.js", "src/shared/views/*.hbs"]
+}
