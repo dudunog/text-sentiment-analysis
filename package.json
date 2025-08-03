@@ -5,10 +5,15 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon",
-    "build": "tsc && tsc-alias && cpx \"./src/shared/views/**/*\" ./dist/src/shared/views --clean && cpx \"./upload/**/*\" ./dist/upload --clean",
+    "db:dev": "docker-compose -f ./docker-compose.yml up -d",
+    "build": "tsc && tsc-alias",
     "start": "cross-env NODE_ENV=production node dist/src/main/server/index.js",
+    "migration:generate": "cross-env NODE_ENV=development typeorm-ts-node-commonjs -d ./src/main/config/database/data-source.ts migration:generate ./src/main/config/database/migrations/default",
+    "migration:run": "cross-env NODE_ENV=development typeorm-ts-node-commonjs -d ./src/main/config/database/data-source.ts migration:run",
+    "migration:revert": "cross-env NODE_ENV=development typeorm-ts-node-commonjs -d ./src/main/config/database/data-source.ts migration:revert",
     "lint": "eslint . --ext .ts --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typeorm": "typeorm-ts-node-commonjs"
   },
   "husky": {
     "hooks": {
