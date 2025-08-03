@@ -1,19 +1,13 @@
 import logger from "@main/adapters/logger-adapter";
-import sqlite3 from "sqlite3";
+import { AppDataSource } from "./database/data-source";
 
 export default async () => {
   try {
     logger.mapperInfo("Connecting to database...");
 
-    const database = new sqlite3.Database("./sqlite/db.db", (err) => {
-      if (err) {
-        logger.mapperError(err.message);
-        throw err;
-      }
-      logger.mapperInfo("Connection with database established!");
-    });
+    await AppDataSource.initialize();
 
-    return database;
+    logger.mapperInfo("Connection with database established!");
   } catch (error) {
     logger.mapperError(error);
     throw error;

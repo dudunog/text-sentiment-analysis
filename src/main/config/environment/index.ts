@@ -44,10 +44,10 @@ const Environment: IEnvironment = {
     },
     database: {
       postgresql: {
-        host: process.env.POSTGRESQL_DATABASE_HOST || "localhost",
-        port: Number(process.env.POSTGRESQL_DATABASE_PORT) || 5438,
-        user: process.env.POSTGRESQL_DATABASE_USER || "development",
-        password: process.env.POSTGRESQL_DATABASE_PASSWORD || "",
+        host: process.env.DATABASE_HOST || "localhost",
+        port: Number(process.env.DATABASE_PORT) || 5438,
+        user: process.env.DATABASE_USER || "development",
+        password: process.env.DATABASE_PASSWORD || "",
         database:
           process.env.POSTGRESQL_DATABASE_NAME || "text-sentiment-analysis",
       },

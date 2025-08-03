@@ -7,7 +7,7 @@ const makeApp = async () => {
   const app = express();
   setupMiddlewares(app);
   setupRoutes(app);
-  setupDatabase();
+  await setupDatabase();
 
   return app;
 };
