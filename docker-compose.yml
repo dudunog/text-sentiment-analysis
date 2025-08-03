@@ -6,9 +6,9 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: s5f98d2eg1t8b53d6gc91fd4g7
+      POSTGRES_USER: development
       POSTGRES_DB: text-sentiment-analysis
-      POSTGRES_PASSWORD: b8b2c468625df4g8b2ebb7dd49521395
+      POSTGRES_PASSWORD: testing
     ports:
       - "5438:5432"
     volumes:
