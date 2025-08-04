@@ -18,6 +18,10 @@ export class TextAnalysisRepository implements ITextAnalysisRepository {
     return await this.textAnalysisCollection.save(insertedInvoice);
   }
 
+  async list(): Promise<TextAnalysisModel[]> {
+    return this.textAnalysisCollection.find();
+  }
+
   async delete(data: TextAnalysisModel): Promise<void> {
     await this.textAnalysisCollection.delete(data.id);
   }

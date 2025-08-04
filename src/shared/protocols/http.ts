@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface HttpResponse {
   statusCode: number;
   body: unknown;
@@ -5,8 +6,7 @@ export interface HttpResponse {
 
 export interface HttpRequest {
   params?: unknown;
-  query?: unknown;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  query?: any;
   body?: any;
   headers?: unknown;
 }
