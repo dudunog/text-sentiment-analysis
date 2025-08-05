@@ -156,13 +156,22 @@ src/
 │       ├── external/            # Adaptadores externos
 │       └── usecases/           # Casos de uso
 ├── main/
+│   ├── adapters/               # Adaptadores
 │   ├── config/                 # Configurações
-│   ├── server/                 # Servidor
-│   └── adapters/              # Adaptadores
+│   │   ├── database/           # Configuração do banco
+│   │   └── environment/        # Variáveis de ambiente
+│   ├── constants/              # Constantes
+│   ├── middlewares/            # Middlewares
+│   └── server/                 # Servidor
 └── shared/
-    ├── providers/             # Provedores (Hugging Face)
-    ├── protocols/             # Interfaces e tipos
-    └── utils/                 # Utilitários
+    ├── errors/                 # Tratamento de erros
+    ├── helpers/                # Helpers
+    ├── protocols/              # Interfaces e tipos
+    │   └── logger/             # Logger
+    ├── providers/              # Provedores externos
+    │   └── hugging-face/       # Provedor Hugging Face
+    ├── utils/                  # Utilitários
+    └── validations/            # Validações
 ```
 
 ## 🤝 Contribuição
