@@ -48,8 +48,7 @@ const Environment: IEnvironment = {
         port: Number(process.env.DATABASE_PORT) || 5438,
         user: process.env.DATABASE_USER || "development",
         password: process.env.DATABASE_PASSWORD || "testing",
-        database:
-          process.env.POSTGRESQL_DATABASE_NAME || "text-sentiment-analysis",
+        database: process.env.DATABASE_NAME || "text-sentiment-analysis",
       },
     },
   },
