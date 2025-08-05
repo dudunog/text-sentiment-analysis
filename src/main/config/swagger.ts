@@ -56,17 +56,6 @@ const options = {
               description: "Sentimento detectado (positive, negative, neutral)",
               enum: ["positive", "negative", "neutral"],
             },
-            frequent_words: {
-              type: "array",
-              items: {
-                type: "string",
-              },
-              description: "Lista das palavras mais frequentes no texto",
-            },
-            total_words: {
-              type: "integer",
-              description: "Total de palavras no texto",
-            },
             toxicity: {
               type: "string",
               description: "Categoria de toxicidade detectada",
@@ -78,6 +67,17 @@ const options = {
                 "threat",
                 "non-toxic",
               ],
+            },
+            frequent_words: {
+              type: "array",
+              items: {
+                type: "string",
+              },
+              description: "Lista das palavras mais frequentes no texto",
+            },
+            total_words: {
+              type: "integer",
+              description: "Total de palavras no texto",
             },
           },
         },
@@ -102,11 +102,11 @@ const options = {
               },
               description: "Lista de análises que contêm o termo buscado",
             },
-            totalFound: {
+            total_found: {
               type: "integer",
               description: "Total de resultados encontrados",
             },
-            searchTerm: {
+            search_term: {
               type: "string",
               description: "Termo de busca",
             },

@@ -39,15 +39,16 @@ export class AnalyzeTextUseCase implements IAnalyzeTextUseCase {
       const textAnalysisCreated = await this.textAnalysisRepository.create({
         text,
         sentiment: sentimentAnalysis.sentiment,
+        toxicity: toxicityAnalysis.toxicity,
         frequent_words: frequent_words_mapped,
       });
 
       const response = {
         text: textAnalysisCreated.text,
         sentiment: textAnalysisCreated.sentiment,
+        toxicity: textAnalysisCreated.toxicity,
         frequent_words: textAnalysisCreated.frequent_words,
         total_words,
-        toxicity: toxicityAnalysis.toxicity,
       };
 
       return Result.ok(response);

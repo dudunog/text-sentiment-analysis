@@ -17,6 +17,9 @@ export class TextAnalysisEntity implements TextAnalysisModel {
   @Column()
   sentiment: string;
 
+  @Column()
+  toxicity: string;
+
   @Column("text", { array: true })
   frequent_words: string[];
 

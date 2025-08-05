@@ -42,17 +42,17 @@ import { makeSearchTermFactory } from "@contexts/text-analysis/external/factorie
  *                 value:
  *                   text: "Eu estou muito feliz hoje! O dia está lindo e tudo está indo muito bem."
  *                   sentiment: "positive"
+ *                   toxicity: "non-toxic"
  *                   frequent_words: ["muito", "feliz", "hoje", "lindo", "indo", "bem"]
  *                   total_words: 12
- *                   toxicity: "non-toxic"
  *               negative_analysis:
  *                 summary: Análise de texto negativo
  *                 value:
  *                   text: "Estou muito triste e decepcionado com o que aconteceu hoje."
  *                   sentiment: "negative"
+ *                   toxicity: "non-toxic"
  *                   frequent_words: ["muito", "triste", "decepcionado", "aconteceu", "hoje"]
  *                   total_words: 8
- *                   toxicity: "non-toxic"
  *       400:
  *         description: Dados de entrada inválidos
  *         content:
@@ -111,23 +111,23 @@ import { makeSearchTermFactory } from "@contexts/text-analysis/external/factorie
  *                   results:
  *                     - text: "Eu estou muito feliz hoje!"
  *                       sentiment: "positive"
+ *                       toxicity: "non-toxic"
  *                       frequent_words: ["muito", "feliz", "hoje"]
  *                       total_words: 5
- *                       toxicity: "non-toxic"
  *                       created_at: "2024-01-15T10:30:00.000Z"
  *                     - text: "Hoje foi um dia muito produtivo!"
  *                       sentiment: "positive"
+ *                       toxicity: "non-toxic"
  *                       frequent_words: ["hoje", "muito", "produtivo"]
  *                       total_words: 6
- *                       toxicity: "non-toxic"
  *                       created_at: "2024-01-15T11:30:00.000Z"
- *                   totalFound: 2
- *                   searchTerm: "palavra"
+ *                   total_found: 2
+ *                   search_term: "palavra"
  *               no_results:
  *                 summary: Nenhum resultado encontrado
  *                 value:
  *                   results: []
- *                   totalFound: 0
+ *                   total_found: 0
  *       400:
  *         description: Parâmetro de busca inválido
  *         content:

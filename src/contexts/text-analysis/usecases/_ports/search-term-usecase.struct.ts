@@ -8,10 +8,10 @@ export interface ISearchTermUseCaseRequest {
 export interface ISearchTermUseCaseResponse {
   analyses: Pick<
     TextAnalysisModel,
-    "text" | "sentiment" | "frequent_words" | "created_at"
+    "text" | "sentiment" | "toxicity" | "frequent_words" | "created_at"
   >[];
-  totalFound: number;
-  searchTerm: string;
+  total_found: number;
+  search_term: string;
 }
 
 export type ISearchTermUseCase = UseCase<

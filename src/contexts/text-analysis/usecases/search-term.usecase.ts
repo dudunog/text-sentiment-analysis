@@ -26,21 +26,22 @@ export class SearchTermUseCase implements ISearchTermUseCase {
 
       const searchResult: ISearchTermUseCaseResponse = {
         analyses: matchingAnalyses,
-        totalFound: matchingAnalyses.length,
-        searchTerm: term,
+        total_found: matchingAnalyses.length,
+        search_term: term,
       };
 
       const analyses = searchResult.analyses.map((analysis) => ({
         text: analysis.text,
         sentiment: analysis.sentiment,
+        toxicity: analysis.toxicity,
         frequent_words: analysis.frequent_words,
         created_at: analysis.created_at,
       }));
 
       return Result.ok({
         analyses,
-        totalFound: searchResult.totalFound,
-        searchTerm: searchResult.searchTerm,
+        total_found: searchResult.total_found,
+        search_term: searchResult.search_term,
       });
     } catch (error) {
       return Result.fail(error as Error);
