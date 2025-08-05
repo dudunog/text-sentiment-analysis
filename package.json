@@ -42,7 +42,6 @@
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "pg": "^8.16.3",
-    "sqlite3": "^5.1.7",
     "stopword": "^3.1.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
