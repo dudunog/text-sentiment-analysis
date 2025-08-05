@@ -63,6 +63,22 @@ const options = {
               },
               description: "Lista das palavras mais frequentes no texto",
             },
+            total_words: {
+              type: "integer",
+              description: "Total de palavras no texto",
+            },
+            toxicity: {
+              type: "string",
+              description: "Categoria de toxicidade detectada",
+              enum: [
+                "toxic",
+                "obscene",
+                "insult",
+                "identity_hate",
+                "threat",
+                "non-toxic",
+              ],
+            },
             created_at: {
               type: "string",
               format: "date-time",

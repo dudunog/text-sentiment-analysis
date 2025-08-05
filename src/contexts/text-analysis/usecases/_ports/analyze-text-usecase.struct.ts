@@ -10,6 +10,7 @@ export type IAnalyzeTextUseCaseResponse = Pick<
   "text" | "sentiment" | "frequent_words"
 > & {
   total_words: number;
+  toxicity: string;
 };
 
 export type IAnalyzeTextUseCase = UseCase<

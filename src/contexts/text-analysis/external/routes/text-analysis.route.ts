@@ -1,14 +1,14 @@
 import { adaptRoute } from "@main/adapters/express-adapter";
 import { Router } from "express";
 import { makeAnalyzeTextFactory } from "@contexts/text-analysis/external/factories/analyze-text.factory";
-import { makeSearchTermFactory } from "../factories/search-term.factory";
+import { makeSearchTermFactory } from "@contexts/text-analysis/external/factories/search-term.factory";
 
 /**
  * @swagger
  * /analyze-text:
  *   post:
- *     summary: Analisa o sentimento de um texto
- *     description: Analisa um texto de entrada e retorna o sentimento detectado, palavras frequentes e estatísticas básicas
+ *     summary: Analisa o sentimento e toxicidade de um texto
+ *     description: Analisa um texto de entrada e retorna o sentimento detectado, toxicidade, palavras frequentes e estatísticas básicas
  *     tags: [Text Analysis]
  *     requestBody:
  *       required: true
@@ -44,6 +44,8 @@ import { makeSearchTermFactory } from "../factories/search-term.factory";
  *                   text: "Eu estou muito feliz hoje! O dia está lindo e tudo está indo muito bem."
  *                   sentiment: "positive"
  *                   frequent_words: ["muito", "feliz", "hoje", "lindo", "indo", "bem"]
+ *                   total_words: 12
+ *                   toxicity: "non-toxic"
  *                   created_at: "2024-01-15T10:30:00.000Z"
  *               negative_analysis:
  *                 summary: Análise de texto negativo
@@ -52,6 +54,8 @@ import { makeSearchTermFactory } from "../factories/search-term.factory";
  *                   text: "Estou muito triste e decepcionado com o que aconteceu hoje."
  *                   sentiment: "negative"
  *                   frequent_words: ["muito", "triste", "decepcionado", "aconteceu", "hoje"]
+ *                   total_words: 8
+ *                   toxicity: "non-toxic"
  *                   created_at: "2024-01-15T10:30:00.000Z"
  *       400:
  *         description: Dados de entrada inválidos
@@ -113,11 +117,15 @@ import { makeSearchTermFactory } from "../factories/search-term.factory";
  *                       text: "Eu estou muito feliz hoje!"
  *                       sentiment: "positive"
  *                       frequent_words: ["muito", "feliz", "hoje"]
+ *                       total_words: 5
+ *                       toxicity: "non-toxic"
  *                       created_at: "2024-01-15T10:30:00.000Z"
  *                     - id: "123e4567-e89b-12d3-a456-426614174001"
  *                       text: "Hoje foi um dia muito produtivo!"
  *                       sentiment: "positive"
  *                       frequent_words: ["hoje", "muito", "produtivo"]
+ *                       total_words: 6
+ *                       toxicity: "non-toxic"
  *                       created_at: "2024-01-15T11:30:00.000Z"
  *                   total: 2
  *               no_results:

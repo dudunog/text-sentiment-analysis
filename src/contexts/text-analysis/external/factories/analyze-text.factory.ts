@@ -2,7 +2,7 @@ import { AnalyzeTextController } from "@contexts/text-analysis/controllers/analy
 import { AnalyzeTextUseCase } from "@contexts/text-analysis/usecases/analyze-text.usecase";
 import { Controller } from "@shared/protocols";
 import { makeHuggingFaceProvider } from "@shared/providers/hugging-face/factories/hugging-face-provider.factory";
-import { TextAnalysisRepository } from "../repositories/text-analysis.repository";
+import { TextAnalysisRepository } from "@contexts/text-analysis/external/repositories/text-analysis.repository";
 import { makeAnalyzeTextValidationFactory } from "./analyze-text-validation.factory";
 
 export const makeAnalyzeTextFactory = (): Controller => {
