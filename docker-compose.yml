@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  text-sentiment-analysis-postgres:
+    container_name: text-sentiment-analysis-postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: development
+      POSTGRES_DB: text-sentiment-analysis
+      POSTGRES_PASSWORD: testing
+    ports:
+      - "5438:5432"
+    volumes:
+      - ./data/data:/var/lib/postgresql/data
