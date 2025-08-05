@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm";
+import { join } from "path";
 import { Environment } from "../environment";
 
 export const AppDataSource = new DataSource({
@@ -8,6 +9,6 @@ export const AppDataSource = new DataSource({
   username: Environment.infrastructure.database.postgresql.user,
   password: Environment.infrastructure.database.postgresql.password,
   database: Environment.infrastructure.database.postgresql.database,
-  entities: ["./src/contexts/**/external/entities/*.{ts,js}"],
-  migrations: [`${__dirname}/migrations/*.{ts,js}`],
+  entities: [join(__dirname, "..", "..", "..", "**", "*.entity.{ts,js}")],
+  migrations: [join(__dirname, "migrations", "*.{ts,js}")],
 });
