@@ -48,6 +48,7 @@ npm install
 Crie um arquivo `.env` na raiz do projeto:
 ```env
 # Banco de dados
+API_URL=http://localhost:49120
 DATABASE_HOST=localhost
 DATABASE_PORT=5438
 DATABASE_USER=development
