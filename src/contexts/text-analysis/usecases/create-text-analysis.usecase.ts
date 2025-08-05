@@ -14,11 +14,13 @@ export class CreateTextAnalysisUseCase implements ICreateTextAnalysisUseCase {
   async execute({
     text,
     sentiment,
+    toxicity,
     frequent_words,
   }: ICreateTextAnalysisUseCaseDTO): Promise<Result<TextAnalysisModel>> {
     const textAnalysis = await this.textAnalysisRepository.create({
       text,
       sentiment,
+      toxicity,
       frequent_words,
     });
 

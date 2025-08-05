@@ -4,6 +4,7 @@ import { UseCase } from "@shared/protocols";
 export interface ICreateTextAnalysisUseCaseDTO {
   text: string;
   sentiment: string;
+  toxicity: string;
   frequent_words: string[];
 }
 
