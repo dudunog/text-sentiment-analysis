@@ -171,7 +171,6 @@ export class HuggingFaceProvider implements IHuggingFaceProvider {
     predictedToxicity: PredictedToxicity;
     confidence: ConfidenceScore;
   } {
-    // Encontra a categoria com maior score
     let maxScore = 0;
     let predictedToxicity: PredictedToxicity = "non-toxic";
 
@@ -182,7 +181,6 @@ export class HuggingFaceProvider implements IHuggingFaceProvider {
       }
     });
 
-    // Se o maior score for muito baixo, considera como não tóxico
     if (maxScore < 0.1) {
       return {
         predictedToxicity: "non-toxic",

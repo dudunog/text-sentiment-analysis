@@ -17,18 +17,21 @@ export default (app: Express): void => {
   const router = Router();
   app.use("/api", router);
 
-  // Configuração do Swagger
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
-    customCss: '.swagger-ui .topbar { display: none }',
-    customSiteTitle: 'Text Sentiment Analysis API Documentation',
-    customfavIcon: '/favicon.ico',
-    swaggerOptions: {
-      docExpansion: 'list',
-      filter: true,
-      showRequestHeaders: true,
-      showResponseHeaders: true,
-    }
-  }));
+  app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(specs, {
+      customCss: ".swagger-ui .topbar { display: none }",
+      customSiteTitle: "Text Sentiment Analysis API Documentation",
+      customfavIcon: "/favicon.ico",
+      swaggerOptions: {
+        docExpansion: "list",
+        filter: true,
+        showRequestHeaders: true,
+        showResponseHeaders: true,
+      },
+    }),
+  );
 
   const routes = mapRoutes();
 
