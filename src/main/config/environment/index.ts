@@ -14,6 +14,9 @@ export interface IEnvironment {
     web: {
       url: string;
     };
+    api: {
+      url: string;
+    };
     database: {
       postgresql: {
         host: string;
@@ -41,6 +44,11 @@ const Environment: IEnvironment = {
     },
     web: {
       url: process.env.WEB_URL,
+    },
+    api: {
+      url:
+        process.env.API_URL ||
+        `http://localhost:${Number(process.env.SERVER_PORT) || 49120}`,
     },
     database: {
       postgresql: {

@@ -2,7 +2,7 @@ import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Environment } from "./environment";
 
-const port = Environment.infrastructure.server.rest.express.port;
+const serverUrl = Environment.infrastructure.api.url;
 
 const options = {
   definition: {
@@ -23,7 +23,7 @@ const options = {
     },
     servers: [
       {
-        url: `http://localhost:${port}/api`,
+        url: `${serverUrl}/api`,
         description: "Servidor de Desenvolvimento",
       },
     ],
