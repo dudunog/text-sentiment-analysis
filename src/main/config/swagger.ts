@@ -79,11 +79,6 @@ const options = {
                 "non-toxic",
               ],
             },
-            created_at: {
-              type: "string",
-              format: "date-time",
-              description: "Data e hora da criação da análise",
-            },
           },
         },
         SearchTermRequest: {
@@ -107,9 +102,13 @@ const options = {
               },
               description: "Lista de análises que contêm o termo buscado",
             },
-            total: {
+            totalFound: {
               type: "integer",
               description: "Total de resultados encontrados",
+            },
+            searchTerm: {
+              type: "string",
+              description: "Termo de busca",
             },
           },
         },
