@@ -2,7 +2,7 @@ import { AppDataSource } from "@main/config/database/data-source";
 import { ITextAnalysisRepository } from "@contexts/text-analysis/usecases/_ports/repositories/text-analysis-repository.struct";
 import { CreationModel } from "@shared/protocols/creation-model";
 import { TextAnalysisModel } from "@contexts/text-analysis/domain/models/text-analysis-model.struct";
-import { TextAnalysisEntity } from "../entities/text-analysis-entity";
+import { TextAnalysisEntity } from "../entities/text-analysis.entity";
 
 export class TextAnalysisRepository implements ITextAnalysisRepository {
   constructor(
